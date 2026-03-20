@@ -1,0 +1,7 @@
+pandas
+fastapi
+pyarrow
+python-dotenv
+uvicorn
+sqlachemy
+psycopg2-binary

@@ -17,4 +17,12 @@ def extract () -> pd.DataFrame:
     
     df = pd.read_csv(caminho_arquivo, low_memory= False, encoding='utf-8', delimiter=";")
     logger.info("Arquivo extraido com sucesso / Colunas: %s, Linhas: %s", df.shape[1], len(df))
+    
+    try:
+        df.to_parquet("data_lake/bronze/carga_energia.parquet", index= False)
+        logger.info("Arquivo salvo no Data Lake Bronze com sucesso")
+        
+    except Exception as e:
+        logger.error(f"Erro ao salvar no Data Lake Bronze: {e}")
+        
     return df 

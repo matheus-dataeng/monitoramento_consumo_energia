@@ -1,3 +1,6 @@
 energia-venv/
 data/
 .env 
+apoio_notebooks/
+__pycache__/
+*.pyc
