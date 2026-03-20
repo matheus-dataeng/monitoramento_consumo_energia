@@ -65,7 +65,7 @@ def load(
             ]
 
             for df, tabela in dfs:
-                df.to_sql(name = tabela, con = engine, index = False, if_exists = "append", chunksize = 1000)
+                df.to_sql(name = tabela, con = conn, index = False, if_exists = "append", chunksize = 1000)
                 logger.info("Tabela %s carregada / Colunas: %s, Linhas: %s", tabela, df.shape[1], len(df))
         
     except Exception as e:
