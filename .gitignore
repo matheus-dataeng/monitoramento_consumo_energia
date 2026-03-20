@@ -4,3 +4,8 @@ data/
 apoio_notebooks/
 __pycache__/
 *.pyc
+carga_energia.parquet 
+dim_subsistema.parquet 
+dim_tempo.parquet
+fato_energia.parquet
+carga_energia_tratada.parquet 
