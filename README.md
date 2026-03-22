@@ -2,7 +2,7 @@
 
 ## 📌 Visão Geral
 
-Este projeto implementa um pipeline completo de dados para análise de consumo de energia no Brasil, seguindo a arquitetura de Data Lake (Arquitetura Medalhão):
+Este projeto implementa um pipeline completo de dados para análise de consumo de energia no Brasil em 2025, seguindo a arquitetura de Data Lake (Arquitetura Medalhão):
 
 - **Bronze** → dados brutos  
 - **Silver** → dados tratados e validados  
