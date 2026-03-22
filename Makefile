@@ -17,9 +17,13 @@ install: venv
 freeze:
 	$(PIP) freeze > requirements.txt
 
+# Rodar o Pipeline
+run-pipeline:
+	$(PYTHON) src/main.py
+
 # Inicialização da API localmente
 run-api:
-	uvicorn app.main:app --reload --port 8001
+	$(UVICORN) app.main:app --reload --port 8001
 
 # Remove arquivos temporários do Python
 clean:
