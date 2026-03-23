@@ -3,5 +3,5 @@ fastapi
 pyarrow
 python-dotenv
 uvicorn
-sqlachemy
+sqlalchemy
 psycopg2-binary

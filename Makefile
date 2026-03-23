@@ -1,5 +1,5 @@
 # Definição do ambiente virtual
-VENV_NAME=energia-env
+VENV_NAME=energia-venv
 PYTHON_BIN=python3
 PYTHON=$(VENV_NAME)/bin/python
 PIP=$(VENV_NAME)/bin/pip
