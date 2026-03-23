@@ -21,7 +21,7 @@ def get_subsistemas():
     
     except Exception as e:
         logger.error(f"Erro ao consultar dim_subsistema: {e}")
-        return {"erro" : "Falha ao consultar dados na tabela dim_subsistema"}
+        raise HTTPException(status_code=500, detail= "Erro ao consultar dados")
 
     finally:
         db.close()
@@ -56,11 +56,13 @@ def get_subsistemas_sigla(subsistema: str):
         logger.info("Consulta realizada na tabela dim_subsistema")
         return subsistema_sigla
     
+    except HTTPException:
+        raise 
+    
     except Exception as e:
         logger.error(f"Erro ao consultar {subsistema} na tabela dim_subsistema: {e}")
         raise HTTPException(status_code=500, detail=f"Erro ao consultar {subsistema}")
         
-    
     finally:
         db.close()
             

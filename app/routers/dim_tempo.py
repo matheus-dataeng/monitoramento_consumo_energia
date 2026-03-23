@@ -19,9 +19,8 @@ def get_tempo():
     
     except Exception as e:
         logger.error(f"Erro ao consultar dim_tempo: {e}")
-        raise HTTPException(status_code=500, detail="Error")
-        
-
+        raise HTTPException(status_code=500, detail="Erro ao cosultar dados da tabela")
+       
     finally:
         db.close()
 
@@ -47,12 +46,19 @@ def get_tempo_mes(mes: int):
         result = db.execute(query, {"mes" : mes})
         tempo = result.mappings().all()
         
-        logger.info("Consulta realizada na tabela dim_tempo para Ano e Mês")
+        if not tempo:
+            logger.warning(f"Registros do mês {mes} não encontrados")
+            raise HTTPException(status_code= 404, detail= f"Registros do mês {mes} não encontrados")
+        
+        logger.info(f"Consulta realizada ao dados do mês: {mes}")
         return tempo
     
+    except HTTPException:
+        raise  
+    
     except Exception as e:
-        logger.info(f"Erro ao consultar mes: {mes}: {e}")
-        raise HTTPException(status_code=500, detail=f"Erro ao consultar mês: {mes}")
+        logger.error(f"Erro ao consultar mes: {mes}: {e}")
+        raise HTTPException(status_code=500, detail=f"Erro ao consultar dados do mês: {mes}")
     
     finally: 
         db.close()

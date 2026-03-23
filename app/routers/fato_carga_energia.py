@@ -59,6 +59,9 @@ def get_fato_ids(id_tempo: int, id_subsistema: int):
         logger.info(f"Consulta realizada aos registros {id_tempo} e {id_subsistema}")
         return fato_ids
     
+    except HTTPException:
+        raise
+    
     except Exception as e:
         logger.error(f"Erro ao consultar {id_tempo} e {id_subsistema}: {e}")
         raise HTTPException(status_code=500, detail=f"Erro ao consultar {id_tempo} e {id_subsistema}")
@@ -94,14 +97,17 @@ def get_fato_ano(data_start: str, data_end: str):
         fato_data = result.mappings().all()
         
         if not fato_data:
-            logger.warning(f"Registro de {data_start} e {data_end} não encontrados")
+            logger.warning(f"Registro de {data_start} a {data_end} não encontrados")
             raise HTTPException(status_code=404, detail= f"Registros de {data_start} a {data_end} não encontrados")    
         
         logger.info(f"Consulta realizada nos registros de {data_start} a {data_end}")
         return fato_data
-        
+    
+    except HTTPException:
+        raise
+    
     except Exception as e:
-        logger.error(f"Erro ao consultar {data_start} e {data_end}: {e}")
+        logger.error(f"Erro ao consultar dados de {data_start} a {data_end}: {e}")
         raise HTTPException(status_code=500, detail=f"Erro ao tentar encontrar registros de {data_start} a {data_end}")
     
     finally: 
