@@ -43,7 +43,7 @@ def metrics_subsistema(subsistema: str):
 
 @router.get("/carga-media/{mes}")
 
-def get_metrics_mes(mes: str):
+def get_metrics_mes(mes: int):
     db = SessionLocal()
     
     try:     
