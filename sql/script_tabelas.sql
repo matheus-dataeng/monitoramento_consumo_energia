@@ -1,3 +1,5 @@
+-- CRIAÇÃO DAS TABELAS NO BANCO DE DADOS
+
 CREATE TABLE IF NOT EXISTS "dim_tempo" (
     "Id_tempo" SERIAL PRIMARY KEY,
     "Data" DATE NOT NULL,
@@ -5,7 +7,7 @@ CREATE TABLE IF NOT EXISTS "dim_tempo" (
     "Mes" INT NOT NULL,
     "Dia" INT NOT NULL,
     "Trimestre" INT NOT NULL,
-    "Dia_semana" varchar(30) NOT NULL
+    "Dia_semana" VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS "dim_subsistema" (
