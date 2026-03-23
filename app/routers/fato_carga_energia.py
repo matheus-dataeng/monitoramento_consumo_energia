@@ -2,6 +2,7 @@ import logging as log
 from sqlalchemy import text 
 from app.db.database import SessionLocal
 from fastapi import APIRouter
+from fastapi import HTTPException
 
 router = APIRouter()
 logger = log.getLogger(__name__)
@@ -14,14 +15,14 @@ def get_fato():
     try:
         query = text("SELECT * FROM fato_carga_energia LIMIT 100")
         result = db.execute(query)
-        fato = result.mappings().all()
+        
         
         logger.info("Consulta realizada na tabela fato_carga_energia")
-        return fato
+        return result.mappings().all()
     
     except Exception as e:
         logger.error(f"Erro ao consultar tabela fato {e}")    
-        return {"erro" : "Falha ao consultar dados na tabela fato"}
+        raise HTTPException(status_code=500, detail="Erro ao consultar dados da tabela fato_carga_energia")
     
     finally:
         db.close()
@@ -56,14 +57,14 @@ def get_fato_ids(id_tempo: int, id_subsistema: int):
         
         if not fato_ids:
             logger.warning(f"Registros {id_tempo} e {id_subsistema} não encontrados")
-            return {"erro" : "Registros não encontrados"}
+            raise HTTPException(status_code=404, detail= f"Ids {id_tempo} e {id_subsistema} não encontrados")
         
         logger.info(f"Consulta realizada aos registros {id_tempo} e {id_subsistema}")
         return fato_ids
     
     except Exception as e:
         logger.error(f"Erro ao consultar {id_tempo} e {id_subsistema}: {e}")
-        return {"erro" : "Falha ao encontrar os registros"}
+        raise HTTPException(status_code=500, detail=f"Erro ao consultar {id_tempo} e {id_subsistema}")
     
     finally:
         db.close()
@@ -97,14 +98,14 @@ def get_fato_ano(data_start: str, data_end: str):
         
         if not fato_data:
             logger.warning(f"Registro de {data_start} e {data_end} não encontrados")
-            return {"erro" : "Registros não encontrados"}    
+            raise HTTPException(status_code=404, detail= f"Registros de {data_start} a {data_end} não encontrados")    
         
-        logger.info(f"Consulta realizada nos registros {data_start} e {data_end}")
+        logger.info(f"Consulta realizada nos registros de {data_start} a {data_end}")
         return fato_data
         
     except Exception as e:
         logger.error(f"Erro ao consultar {data_start} e {data_end}: {e}")
-        return {"erro" : "Registros não encontrados"}
+        raise HTTPException(status_code=500, detail=f"Erro ao tentar encontrar registros de {data_start} a {data_end}")
     
     finally: 
         db.close()

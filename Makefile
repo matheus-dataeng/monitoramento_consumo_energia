@@ -3,6 +3,7 @@ VENV_NAME=energia-venv
 PYTHON_BIN=python3
 PYTHON=$(VENV_NAME)/bin/python
 PIP=$(VENV_NAME)/bin/pip
+UVICORN=$(VENV_NAME)/bin/uvicorn
 
 # Cria o ambiente virtual Python
 venv:
@@ -23,7 +24,7 @@ run-pipeline:
 
 # Inicialização da API localmente
 run-api:
-	$(UVICORN) app.main:app --reload --port 8001
+	$(UVICORN) app.main:app --reload --port 8000
 
 # Remove arquivos temporários do Python
 clean:

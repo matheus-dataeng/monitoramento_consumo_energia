@@ -2,6 +2,7 @@ import logging as log
 from app.db.database import SessionLocal
 from sqlalchemy import text
 from fastapi import APIRouter
+from fastapi import HTTPException
 
 router = APIRouter()
 logger = log.getLogger(__name__)
@@ -34,7 +35,7 @@ def metrics_subsistema(subsistema: str):
     
     except Exception as e:
         logger.error(f"Erro ao consultar a carga do subsistema {subsistema}: {e}")
-        return {"erro" : "Falha ao consultar dados"}
+        raise HTTPException(status_code= 500, detail= f"Erro ao encontrar a carga por subsistema {subsistema}")
     
     finally:
         db.close()
@@ -68,7 +69,7 @@ def get_metrics_mes(mes: str):
 
     except Exception as e:
         logger.error(f"Erro ao consultar a média do {mes}: {e}")
-        return {"erro" : "Falha ao consultar dados"}
+        raise HTTPException(status_code=500, detail= f"Erro ao encontrar a média do mes {mes}")
     
     finally:
         db.close()

@@ -2,6 +2,7 @@ import logging as log
 from app.db.database import SessionLocal
 from sqlalchemy import text 
 from fastapi import APIRouter
+from fastapi import HTTPException
 
 router = APIRouter()
 logger = log.getLogger(__name__)
@@ -51,14 +52,15 @@ def get_subsistemas_sigla(subsistema: str):
         
         if not subsistema_sigla:
             logger.error(f"Registros de {subsistema} não encontrados")
-            return {"erro" : "Registros de subsistema"}
+            raise HTTPException(status_code=404, detail=f"Subsistema {subsistema} não encontrado")
         
         logger.info("Consulta realizada na tabela dim_subsistema")
         return subsistema_sigla
     
     except Exception as e:
         logger.error(f"Erro ao consultar {subsistema} na tabela dim_subsistema: {e}")
-        return {"erro" : "Falha ao buscar registros na tabela dim_subsistema"}
+        raise HTTPException(status_code=500, detail=f"Erro ao consultar {subsistema}")
+        
     
     finally:
         db.close()
