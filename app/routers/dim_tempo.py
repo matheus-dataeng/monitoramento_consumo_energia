@@ -13,10 +13,7 @@ def get_tempo():
     db = SessionLocal()
     
     try:
-        query = text("SELECT * FROM dim_tempo LIMIT 100")
-        result = db.execute(query)
-        
-        
+        result = db.execute(text("SELECT * FROM dim_tempo LIMIT 100"))
         logger.info("Consulta realizada na tabela dim_tempo")
         return result.mappings().all()
     

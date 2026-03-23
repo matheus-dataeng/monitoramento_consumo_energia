@@ -13,8 +13,7 @@ def get_subsistemas():
     db = SessionLocal()
     
     try:
-        query = text("SELECT * FROM dim_subsistema LIMIT 100")
-        result = db.execute(query)
+        result = db.execute(text("SELECT * FROM dim_subsistema LIMIT 100"))
         subsistemas = result.mappings().all()
         
         logger.info("Consulta realizada na tabela dim_subsistema")

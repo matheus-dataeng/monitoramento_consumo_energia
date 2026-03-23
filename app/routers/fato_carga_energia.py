@@ -13,15 +13,12 @@ def get_fato():
     db = SessionLocal()
     
     try:
-        query = text("SELECT * FROM fato_carga_energia LIMIT 100")
-        result = db.execute(query)
-        
-        
+        result = db.execute(text("SELECT * FROM fato_carga_energia LIMIT 100"))   
         logger.info("Consulta realizada na tabela fato_carga_energia")
         return result.mappings().all()
     
     except Exception as e:
-        logger.error(f"Erro ao consultar tabela fato {e}")    
+        logger.error(f"Erro ao consultar tabela fato: {e}")    
         raise HTTPException(status_code=500, detail="Erro ao consultar dados da tabela fato_carga_energia")
     
     finally:
