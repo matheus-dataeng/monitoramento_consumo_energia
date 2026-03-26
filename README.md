@@ -147,10 +147,15 @@ pip install -r requirements.txt
 ### 3. Configurar variáveis de ambiente (.env)
 
 PG_USER=
+
 PG_PASSWORD=
+
 PG_HOST=
+
 PG_PORT=
+
 PG_DBNAME=
+
 CAMINHO_ARQUIVO=
 
 ### 4. Rodar pipeline atraves do comando make disponibilizado pelo arquivo Makefile
